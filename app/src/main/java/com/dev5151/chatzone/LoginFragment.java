@@ -1,5 +1,7 @@
 package com.dev5151.chatzone;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +35,9 @@ public class LoginFragment extends Fragment {
     DatabaseReference userRef;
     String email, password;
     int int1, int2;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    Integer loginState;
 
     @Nullable
     @Override
@@ -62,6 +67,7 @@ public class LoginFragment extends Fragment {
                 }
                 if (int1 == 1 && int2 == 1) {
                     userLogin(email, password);
+
                 }
             }
         });
@@ -77,6 +83,8 @@ public class LoginFragment extends Fragment {
         tvSentence = view.findViewById(R.id.tv_sentence);
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("users");
+        sharedPreferences = getActivity().getSharedPreferences("User Details", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     private void userLogin(String email, String password) {
@@ -85,7 +93,10 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
+                            loginState = 1;
+                            editor.putInt("loginState", loginState);
+                            editor.apply();
+                            AuthActivity.authInterface.switchToMainActivity();
                         } else {
                             Toast.makeText(getActivity(), task.getException().toString(), Toast.LENGTH_LONG).show();
                             Log.e(TAG, task.getException() + "");

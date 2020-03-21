@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class AuthActivity extends AppCompatActivity {
     private FrameLayout frame;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private Integer loginState;
+    private int loginState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,8 @@ public class AuthActivity extends AppCompatActivity {
         if (loginState == 0) {
             fragmentTransition(new LoginFragment());
         } else {
-                authInterface.switchToMainActivity();
+            startActivity(new Intent(AuthActivity.this, MainActivity.class));
+            finish();
         }
 
         authInterface = new AuthInterface() {
@@ -70,7 +72,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void initializeView() {
-        sharedPreferences = getSharedPreferences("User Details", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("User Details", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         frame = findViewById(R.id.frame);
         fragmentManager = getSupportFragmentManager();
