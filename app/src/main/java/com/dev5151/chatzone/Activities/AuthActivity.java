@@ -1,4 +1,4 @@
-package com.dev5151.chatzone;
+package com.dev5151.chatzone.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.transition.Fade;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+
+import com.dev5151.chatzone.Interfaces.AuthInterface;
+import com.dev5151.chatzone.Fragments.LoginFragment;
+import com.dev5151.chatzone.R;
+import com.dev5151.chatzone.Fragments.SignUpFragment;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -55,8 +58,6 @@ public class AuthActivity extends AppCompatActivity {
                 finish();
             }
         };
-
-
     }
 
     private void fragmentTransition(Fragment fragment) {

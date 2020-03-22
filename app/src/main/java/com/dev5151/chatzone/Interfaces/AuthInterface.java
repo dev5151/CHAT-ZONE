@@ -1,4 +1,4 @@
-package com.dev5151.chatzone;
+package com.dev5151.chatzone.Interfaces;
 
 public interface AuthInterface {
     void switchToLogin();

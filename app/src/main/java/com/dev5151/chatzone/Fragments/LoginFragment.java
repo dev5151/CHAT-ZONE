@@ -1,5 +1,7 @@
-package com.dev5151.chatzone;
+package com.dev5151.chatzone.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,41 +16,44 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.dev5151.chatzone.Activities.AuthActivity;
+import com.dev5151.chatzone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.ContentValues.TAG;
 
-public class SignUpFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
-    private EditText edtEmail, edtUsername, edtPassword;
-    private Button btnSignUp;
-    private TextView tvLogin, tvSentence;
-    private FirebaseAuth mAuth;
-    private DatabaseReference userRef;
-    String email, password, username;
-    int int1, int2, int3;
+    EditText edtEmail, edtPassword;
+    Button btnLogin;
+    TextView tvLogin, tvSentence;
+    FirebaseAuth mAuth;
+    DatabaseReference userRef;
+    String email, password;
+    int int1, int2;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    Integer loginState;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
         initializeView(view);
 
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthActivity.getAuthInterface().switchToLogin();
+                AuthActivity.getAuthInterface().switchToSignUp();
             }
         });
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (edtEmail.getText() != null && edtEmail.getText().length() > 0) {
@@ -60,19 +65,10 @@ public class SignUpFragment extends Fragment {
                 if (edtPassword.getText() != null && edtPassword.getText().length() > 0) {
                     password = edtPassword.getText().toString();
                     int2 = 1;
-                } else {
-                    edtPassword.setError("Password cannot be null");
                 }
-                if (edtUsername.getText() != null && edtUsername.getText().length() > 0) {
-                    username = edtUsername.getText().toString();
-                    int3 = 1;
-                } else {
-                    edtUsername.setError("UserName cannot be null");
-                }
+                if (int1 == 1 && int2 == 1) {
+                    userLogin(email, password);
 
-                if (int1 == 1 && int2 == 1 && int3 == 1) {
-                    userRegistration(email, password, username);
-                    AuthActivity.authInterface.switchToLogin();
                 }
             }
         });
@@ -82,27 +78,26 @@ public class SignUpFragment extends Fragment {
 
     private void initializeView(View view) {
         edtEmail = view.findViewById(R.id.et_email);
-        edtUsername = view.findViewById(R.id.et_user_name);
         edtPassword = view.findViewById(R.id.et_password);
-        btnSignUp = view.findViewById(R.id.btn_sign_in);
+        btnLogin = view.findViewById(R.id.btn_sign_in);
         tvLogin = view.findViewById(R.id.tv_login);
         tvSentence = view.findViewById(R.id.tv_sentence);
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("users");
+        sharedPreferences = getActivity().getSharedPreferences("User Details", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
-
-    private void userRegistration(final String email, final String password, final String username) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+    private void userLogin(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = mAuth.getUid();
-                            userRef.child(uid).child("email").setValue(email);
-                            userRef.child(uid).child("password").setValue(password);
-                            userRef.child(uid).child("username").setValue(username);
+                            loginState = 1;
+                            editor.putInt("loginState", loginState);
+                            editor.apply();
+                            AuthActivity.authInterface.switchToMainActivity();
                         } else {
                             Toast.makeText(getActivity(), task.getException().toString(), Toast.LENGTH_LONG).show();
                             Log.e(TAG, task.getException() + "");
@@ -110,5 +105,4 @@ public class SignUpFragment extends Fragment {
                     }
                 });
     }
-
 }

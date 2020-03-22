@@ -6,4 +6,4 @@
     android:layout_height="wrap_content"
     android:id="@+id/toolbar"
     android:background="@color/colorPrimaryDark"
-    tools:context=".AuthActivity"/>
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
