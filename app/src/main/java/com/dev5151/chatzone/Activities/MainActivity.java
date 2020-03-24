@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.dev5151.chatzone.Adapters.ViewPagerAdapter;
 import com.dev5151.chatzone.Fragments.ChatsFragment;
+import com.dev5151.chatzone.Fragments.ProfileFragment;
 import com.dev5151.chatzone.Fragments.UsersFragment;
 import com.dev5151.chatzone.R;
 import com.dev5151.chatzone.Models.User;
@@ -101,15 +102,17 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentList.add(new ChatsFragment());
         fragmentList.add(new UsersFragment());
+        fragmentList.add(new ProfileFragment());
+
         titleList.add("Chats");
         titleList.add("Users");
+        titleList.add("Profile");
 
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),fragmentList,titleList);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
 
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
-
 
     }
 
@@ -123,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout = findViewById(R.id.app_bar_layout);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-        fragmentList=new ArrayList<>();
-        titleList=new ArrayList<>();
+        fragmentList = new ArrayList<>();
+        titleList = new ArrayList<>();
     }
 
 }

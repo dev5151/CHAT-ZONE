@@ -100,12 +100,12 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
                             String uid = mAuth.getUid();
                             userRef.child(uid).child("email").setValue(email);
                             userRef.child(uid).child("password").setValue(password);
                             userRef.child(uid).child("username").setValue(username);
                             userRef.child(uid).child("imgUrl").setValue("default");
+                            userRef.child(uid).child("uid").setValue(uid);
                         } else {
                             Toast.makeText(getActivity(), task.getException().toString(), Toast.LENGTH_LONG).show();
                             Log.e(TAG, task.getException() + "");

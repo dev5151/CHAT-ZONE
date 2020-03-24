@@ -1,6 +1,7 @@
 package com.dev5151.chatzone.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.dev5151.chatzone.Activities.MainActivity;
+import com.dev5151.chatzone.Activities.MessageActivity;
 import com.dev5151.chatzone.Models.User;
 import com.dev5151.chatzone.R;
 
@@ -35,13 +38,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        User user = userList.get(position);
+        final User user = userList.get(position);
         holder.username.setText(user.getUsername());
-        /*if (user.getImgUrl().equals("default")) {
+        if (user.getImgUrl().equals("default")) {
             holder.circleImageView.setImageResource(R.drawable.ic_user_pic);
         } else {
             Glide.with(context).load(user.getImgUrl()).into(holder.circleImageView);
-        }*/
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MessageActivity.class);
+                intent.putExtra("uid", user.getUid());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,7 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tvUserId);
-            circleImageView = itemView.findViewById(R.id.circularImageView);
+            circleImageView = itemView.findViewById(R.id.circleImageView);
         }
     }
 }
