@@ -110,7 +110,7 @@ public class UsersFragment extends Fragment {
 
                     if (!user.getUid().equals(FirebaseAuth.getInstance().getUid())) {
                         userList.add(user);
-                    }
+                        }
                 }
                 userAdapter = new UserAdapter(userList, getContext(), false);
                 recyclerView.setAdapter(userAdapter);

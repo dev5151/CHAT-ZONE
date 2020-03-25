@@ -125,6 +125,24 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         chatRef.push().setValue(hashMap);
+
+        final DatabaseReference myRef= FirebaseDatabase.getInstance().getReference().child("chatList")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child(uid);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                   myRef.child("id").setValue(uid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void readMessage(final String myId, final String userId, final String imgUrl) {
