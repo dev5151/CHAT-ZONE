@@ -52,7 +52,7 @@ public class UsersFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchUsers(charSequence.toString());
+                searchUsers(charSequence.toString().toLowerCase());
             }
 
             @Override
@@ -97,7 +97,7 @@ public class UsersFragment extends Fragment {
     }
 
     private void searchUsers(String string) {
-        Query query = FirebaseDatabase.getInstance().getReference().child("users").orderByChild("username")
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").orderByChild("search")
                 .startAt(string)
                 .endAt(string + "\uf0ff");
 
@@ -105,17 +105,15 @@ public class UsersFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
-                if (search.getText().toString().equals("")) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        User user = dataSnapshot1.getValue(User.class);
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    User user = dataSnapshot1.getValue(User.class);
 
-                        if (!user.getUid().equals(FirebaseAuth.getInstance().getUid())) {
-                            userList.add(user);
-                        }
+                    if (!user.getUid().equals(FirebaseAuth.getInstance().getUid())) {
+                        userList.add(user);
                     }
-                    userAdapter = new UserAdapter(userList, getContext(), false);
-                    recyclerView.setAdapter(userAdapter);
                 }
+                userAdapter = new UserAdapter(userList, getContext(), false);
+                recyclerView.setAdapter(userAdapter);
             }
 
             @Override
