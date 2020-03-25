@@ -7,6 +7,7 @@ public class User {
     String imgUrl;
     String uid;
     String status;
+    String search;
 
     public User() {
 
@@ -56,16 +57,25 @@ public class User {
         return status;
     }
 
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public User(String email, String password, String username, String imgUrl, String uid, String status) {
+    public User(String email, String password, String username, String imgUrl, String uid, String status, String search) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.imgUrl = imgUrl;
         this.uid = uid;
         this.status = status;
+        this.search = search;
     }
 }

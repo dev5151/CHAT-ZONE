@@ -107,6 +107,7 @@ public class SignUpFragment extends Fragment {
                             userRef.child(uid).child("imgUrl").setValue("default");
                             userRef.child(uid).child("uid").setValue(uid);
                             userRef.child(uid).child("status").setValue("offline");
+                            userRef.child(uid).child("search").setValue(username.toLowerCase());
                         } else {
                             Toast.makeText(getActivity(), task.getException().toString(), Toast.LENGTH_LONG).show();
                             Log.e(TAG, task.getException() + "");
