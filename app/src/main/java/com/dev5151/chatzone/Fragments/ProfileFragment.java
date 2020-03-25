@@ -100,16 +100,6 @@ public class ProfileFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
     }
 
-    /*private String uploadImage() {
-        final ProgressDialog pd = new ProgressDialog(getActivity());
-        pd.setMessage("Uploading");
-        pd.show();
-
-        if(imageUri != null){
-            final
-        }
-    }*/
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

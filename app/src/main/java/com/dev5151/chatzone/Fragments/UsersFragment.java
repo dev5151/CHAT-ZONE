@@ -50,6 +50,7 @@ public class UsersFragment extends Fragment {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     if (!dataSnapshot1.getKey().equals(FirebaseAuth.getInstance().getUid())) {
                         User user = dataSnapshot1.getValue(User.class);
@@ -58,7 +59,7 @@ public class UsersFragment extends Fragment {
                 }
                 userAdapter = new UserAdapter(userList, getContext());
                 recyclerView.setAdapter(userAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
 
             @Override
