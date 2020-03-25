@@ -23,10 +23,38 @@
         android:text="User"
         app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toEndOf="@+id/circleImageView"
         app:layout_constraintTop_toTopOf="@+id/circleImageView"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.461" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/status_on"
+        android:layout_width="28dp"
+        android:layout_height="26dp"
+        android:src="@drawable/ic_user_pic"
+        android:visibility="gone"
+        app:civ_border_color="#05df29"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvUserId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/status_off"
+        android:layout_width="28dp"
+        android:layout_height="26dp"
+        android:src="@drawable/ic_user_pic"
+        android:visibility="gone"
+        app:civ_border_color="#bfbfbf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvUserId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

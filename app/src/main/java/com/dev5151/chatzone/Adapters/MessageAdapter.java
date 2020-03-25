@@ -12,12 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.dev5151.chatzone.Models.Chat;
-import com.dev5151.chatzone.Models.User;
 import com.dev5151.chatzone.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GithubAuthCredential;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -25,8 +21,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private final int MESSAGE_TYPE_LEFT = 0;
     private final int MESSAGE_TYPE_RIGHT = 1;
-
-    FirebaseAuth mAuth;
 
     private List<Chat> chatList;
     private Context context;

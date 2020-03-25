@@ -6,6 +6,7 @@ public class User {
     String username;
     String imgUrl;
     String uid;
+    String status;
 
     public User() {
 
@@ -51,11 +52,20 @@ public class User {
         this.uid = uid;
     }
 
-    public User(String email, String password, String username, String imgUrl, String uid) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User(String email, String password, String username, String imgUrl, String uid, String status) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.imgUrl = imgUrl;
         this.uid = uid;
+        this.status = status;
     }
 }

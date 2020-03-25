@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,8 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> userList;
     private Context context;
+    private boolean isChat;
 
-    public UserAdapter(List<User> userList, Context context) {
+    public UserAdapter(List<User> userList, Context context, Boolean isChat) {
         this.userList = userList;
         this.context = context;
     }
@@ -45,6 +47,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         } else {
             Glide.with(context).load(user.getImgUrl()).into(holder.circleImageView);
         }
+        if (isChat) {
+            if (user.getStatus().equals("online")) {
+                holder.status_on.setVisibility(View.VISIBLE);
+                holder.status_off.setVisibility(View.GONE);
+            } else {
+                holder.status_on.setVisibility(View.GONE);
+                holder.status_off.setVisibility(View.VISIBLE);
+            }
+        } else {
+            holder.status_on.setVisibility(View.GONE);
+            holder.status_off.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,11 +78,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private TextView username;
         private CircleImageView circleImageView;
+        private ImageView status_on;
+        private ImageView status_off;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tvUserId);
             circleImageView = itemView.findViewById(R.id.circleImageView);
+            status_on = itemView.findViewById(R.id.status_on);
+            status_off = itemView.findViewById(R.id.status_off);
+
         }
     }
 }
