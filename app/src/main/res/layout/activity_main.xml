@@ -21,8 +21,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circularImageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
 
             <TextView
                 android:id="@+id/username"
@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:textColor="@android:color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -41,10 +42,9 @@
             android:background="@color/colorPrimaryDark"
             app:tabIndicatorColor="@android:color/white"
             app:tabSelectedTextColor="@color/colorAccent"
-            app:tabTextColor="@android:color/white"/>
+            app:tabTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
