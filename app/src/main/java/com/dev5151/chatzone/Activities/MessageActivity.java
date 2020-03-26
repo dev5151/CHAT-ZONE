@@ -39,7 +39,6 @@ public class MessageActivity extends AppCompatActivity {
     private TextView username;
     Intent intent;
     androidx.appcompat.widget.Toolbar toolbar;
-    AppBarLayout appBarLayout;
     String uid;
     DatabaseReference userRef, chatRef;
     private EditText edtMessage;
@@ -67,6 +66,7 @@ public class MessageActivity extends AppCompatActivity {
 
         intent = getIntent();
         uid = intent.getStringExtra("uid");
+
         userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,17 +125,18 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+
         chatRef.push().setValue(hashMap);
 
-        final DatabaseReference myRef= FirebaseDatabase.getInstance().getReference().child("chatList")
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("chatList")
                 .child(FirebaseAuth.getInstance().getUid())
                 .child(uid);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists()){
-                   myRef.child("id").setValue(uid);
+                if (!dataSnapshot.exists()) {
+                    myRef.child("id").setValue(uid);
                 }
             }
 

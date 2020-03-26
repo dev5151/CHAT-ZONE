@@ -10,11 +10,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dev5151.chatzone.Adapters.ViewPagerAdapter;
+import com.dev5151.chatzone.Fragments.ChatRoomFragment;
 import com.dev5151.chatzone.Fragments.ChatsFragment;
 import com.dev5151.chatzone.Fragments.ProfileFragment;
 import com.dev5151.chatzone.Fragments.UsersFragment;
@@ -81,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
         initializeView();
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
 
         userRef.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,10 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentList.add(new ChatsFragment());
         fragmentList.add(new UsersFragment());
+        fragmentList.add(new ChatRoomFragment());
         fragmentList.add(new ProfileFragment());
 
         titleList.add("Chats");
         titleList.add("Users");
+        titleList.add("Room");
         titleList.add("Profile");
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);

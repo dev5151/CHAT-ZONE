@@ -1,13 +1,11 @@
 package com.dev5151.chatzone.Models;
 
-import android.support.v4.app.INotificationSideChannel;
-
-public class Chat {
+public class ChatRoomModel {
     String sender;
-    String receiver;
     String message;
 
-    public Chat() {
+    public ChatRoomModel() {
+
     }
 
     public String getSender() {
@@ -18,14 +16,6 @@ public class Chat {
         this.sender = sender;
     }
 
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -34,10 +24,10 @@ public class Chat {
         this.message = message;
     }
 
-    public Chat(String sender, String receiver, String message, String isChatRoom) {
+    public ChatRoomModel(String sender, String receiver, String message, String isChatRoom) {
         this.sender = sender;
-        this.receiver = receiver;
         this.message = message;
     }
+
 
 }

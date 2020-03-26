@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.widget.FrameLayout;
 
+import com.dev5151.chatzone.Fragments.ProfileFragment;
 import com.dev5151.chatzone.Interfaces.AuthInterface;
 import com.dev5151.chatzone.Fragments.LoginFragment;
 import com.dev5151.chatzone.R;
@@ -57,6 +58,7 @@ public class AuthActivity extends AppCompatActivity {
                 startActivity(new Intent(AuthActivity.this, MainActivity.class));
                 finish();
             }
+
         };
     }
 
