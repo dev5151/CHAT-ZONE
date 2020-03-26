@@ -93,15 +93,16 @@
         android:id="@+id/tv_sentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
         android:text="Not Registered ? "
         android:textAlignment="viewEnd"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.327"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_login"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_login"

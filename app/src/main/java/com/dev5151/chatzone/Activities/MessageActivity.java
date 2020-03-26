@@ -92,6 +92,7 @@ public class MessageActivity extends AppCompatActivity {
                 message = edtMessage.getText().toString();
                 if (!message.equals("")) {
                     sendMessage(FirebaseAuth.getInstance().getUid(), uid, message);
+                    edtMessage.setText(null);
                 } else {
                     Toast.makeText(getApplicationContext(), "You can't send an empty message", Toast.LENGTH_LONG).show();
                 }
