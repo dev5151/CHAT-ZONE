@@ -61,7 +61,6 @@ public class UsersFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 

@@ -102,7 +102,6 @@ public class SignUpFragment extends Fragment {
                         if (task.isSuccessful()) {
                             String uid = mAuth.getUid();
                             userRef.child(uid).child("email").setValue(email);
-                            userRef.child(uid).child("password").setValue(password);
                             userRef.child(uid).child("username").setValue(username);
                             userRef.child(uid).child("imgUrl").setValue("default");
                             userRef.child(uid).child("uid").setValue(uid);

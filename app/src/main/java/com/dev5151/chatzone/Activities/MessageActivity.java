@@ -132,7 +132,7 @@ public class MessageActivity extends AppCompatActivity {
                 .child(FirebaseAuth.getInstance().getUid())
                 .child(uid);
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {

@@ -21,14 +21,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -69,9 +61,8 @@ public class User {
         this.status = status;
     }
 
-    public User(String email, String password, String username, String imgUrl, String uid, String status, String search) {
+    public User(String email, String username, String imgUrl, String uid, String status, String search) {
         this.email = email;
-        this.password = password;
         this.username = username;
         this.imgUrl = imgUrl;
         this.uid = uid;
